@@ -9,7 +9,7 @@ import { PlayerDocument } from './schemas/player.schema';
 @Injectable()
 export class PlayersService {
   constructor(
-    @InjectModel('PLAYER_MODEL') private playerModel: Model<PlayerDocument>,
+    @InjectModel('Player') private playerModel: Model<PlayerDocument>,
   ) {}
 
   async create(createPlayerDto: CreatePlayerDto): Promise<Player> {
@@ -21,11 +21,11 @@ export class PlayersService {
     return this.playerModel.find().exec();
   }
 
-  async findOne(id: string) {
-    return this.playerModel.find({ _id: id }).exec();
+  async findOne(id: string): Promise<Player> {
+    return this.playerModel.findOne({ _id: id }).exec();
   }
 
-  async update(id: string, updatePlayerDto: UpdatePlayerDto) {
+  async update(id: string, updatePlayerDto: UpdatePlayerDto): Promise<Player> {
     return this.playerModel
       .findOneAndUpdate({ _id: id }, updatePlayerDto)
       .exec();
