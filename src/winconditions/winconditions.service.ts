@@ -1,11 +1,25 @@
 import { Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
 import { CreateWinconditionDto } from './dto/create-wincondition.dto';
 import { UpdateWinconditionDto } from './dto/update-wincondition.dto';
+import { Wincondition } from './entities/wincondition.entity';
+import { WinconditionDocument } from './schemas/wincondition.schema';
 
 @Injectable()
 export class WinconditionsService {
-  create(createWinconditionDto: CreateWinconditionDto) {
-    return 'This action adds a new wincondition';
+  constructor(
+    @InjectModel('Wincondition')
+    private winconditionModel: Model<WinconditionDocument>,
+  ) {}
+
+  async create(
+    createWinconditionDto: CreateWinconditionDto,
+  ): Promise<Wincondition> {
+    const createdWincondition = new this.winconditionModel(
+      createWinconditionDto,
+    );
+    return createdWincondition.save();
   }
 
   findAll() {
