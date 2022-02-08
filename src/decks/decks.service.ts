@@ -27,7 +27,7 @@ export class DecksService {
     return this.deckModel.findOneAndUpdate({ _id: id }, updateDeckDto);
   }
 
-  remove(id: number) {
+  async remove(id: number) {
     // TODO: Implement remove
     return `This action removes a #${id} deck`;
   }

@@ -12,6 +12,12 @@ export class Player {
 
   @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Deck' }] })
   decks: Deck[];
+
+  @Prop({ default: 0 })
+  total_games: number;
+
+  @Prop({ default: 0 })
+  total_wins: number;
 }
 
 export const PlayerSchema = SchemaFactory.createForClass(Player);

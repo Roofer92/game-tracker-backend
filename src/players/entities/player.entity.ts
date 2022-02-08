@@ -1,7 +1,8 @@
-import { Deck } from 'src/decks/schemas/deck.schema';
+import { Deck } from 'src/decks/entities/deck.entity';
 
 export class Player {
-  _id: string;
   name: string;
   decks: Deck[];
+  total_games: number;
+  total_wins: number;
 }

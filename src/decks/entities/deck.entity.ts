@@ -1,11 +1,12 @@
-import { Player } from 'src/players/schemas/player.schema';
+import { Player } from 'src/players/entities/player.entity';
 
 export class Deck {
-  _id: string;
   name: string;
   commander: {
     name: string;
     scryfallUrl: string;
   };
   owner: Player;
+  total_games: number;
+  total_wins: number;
 }
