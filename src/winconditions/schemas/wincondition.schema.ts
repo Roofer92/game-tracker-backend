@@ -1,4 +1,6 @@
-import { Prop, Schema } from '@nestjs/mongoose';
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+
+export type WinconditionDocument = Wincondition & Document;
 
 @Schema()
 export class Wincondition {
@@ -8,3 +10,5 @@ export class Wincondition {
   @Prop({ default: 0 })
   total_wins: number;
 }
+
+export const WinconditionSchema = SchemaFactory.createForClass(Wincondition);
