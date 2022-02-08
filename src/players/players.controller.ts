@@ -37,6 +37,6 @@ export class PlayersController {
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.playersService.remove(+id);
+    return this.playersService.remove(id);
   }
 }

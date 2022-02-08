@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
+import { Deck } from 'src/decks/schemas/deck.schema';
 import { CreatePlayerDto } from './dto/create-player.dto';
 import { UpdatePlayerDto } from './dto/update-player.dto';
 import { Player } from './entities/player.entity';
@@ -31,8 +32,15 @@ export class PlayersService {
       .exec();
   }
 
-  async remove(id: number) {
+  async remove(id: string) {
     // TODO: Implement remove
     return `This action removes a #${id} player`;
+  }
+
+  async addDeck(id: string, deck: Deck) {
+    return await this.playerModel.findOneAndUpdate(
+      { _id: id },
+      { $push: { decks: deck } },
+    );
   }
 }
