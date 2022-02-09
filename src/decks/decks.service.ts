@@ -36,4 +36,18 @@ export class DecksService {
     // TODO: Implement remove
     return `This action removes a #${id} deck`;
   }
+
+  async incrementTotalWins(deck: Deck) {
+    return await this.deckModel.findOneAndUpdate(
+      { deck },
+      { $inc: { total_wins: 1 } },
+    );
+  }
+
+  async incrementTotalGames(deck: Deck) {
+    return await this.deckModel.findOneAndUpdate(
+      { deck },
+      { $inc: { total_games: 1 } },
+    );
+  }
 }

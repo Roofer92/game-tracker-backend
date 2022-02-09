@@ -22,8 +22,8 @@ export class WinconditionsService {
     return createdWincondition.save();
   }
 
-  findAll() {
-    return `This action returns all winconditions`;
+  async findAll() {
+    return this.winconditionModel.find().exec();
   }
 
   findOne(id: number) {
@@ -36,5 +36,12 @@ export class WinconditionsService {
 
   remove(id: number) {
     return `This action removes a #${id} wincondition`;
+  }
+
+  async incrementTotalWins(wincondition: Wincondition) {
+    return await this.winconditionModel.findOneAndUpdate(
+      { wincondition },
+      { $inc: { total_wins: 1 } },
+    );
   }
 }

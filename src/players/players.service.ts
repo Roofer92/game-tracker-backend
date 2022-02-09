@@ -43,4 +43,18 @@ export class PlayersService {
       { $push: { decks: deck } },
     );
   }
+
+  async incrementTotalWins(player: Player) {
+    return await this.playerModel.findOneAndUpdate(
+      { player },
+      { $inc: { total_wins: 1 } },
+    );
+  }
+
+  async incrementTotalGames(player: Player) {
+    return await this.playerModel.findOneAndUpdate(
+      { player },
+      { $inc: { total_games: 1 } },
+    );
+  }
 }

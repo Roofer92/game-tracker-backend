@@ -1,3 +1,4 @@
+import * as mongoose from 'mongoose';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Deck } from 'src/decks/schemas/deck.schema';
 import { Player } from 'src/players/schemas/player.schema';
@@ -22,12 +23,12 @@ export type GameDocument = Game & Document;
 @Schema()
 export class Game {
   @Prop({ type: [ParticipantSchema], required: true })
-  particitpants: Participant[];
+  participants: Participant[];
 
   @Prop({ type: ParticipantSchema })
   winner: Participant;
 
-  @Prop({ type: WinconditionSchema })
+  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Wincondition' })
   wincondition: Wincondition;
 }
 

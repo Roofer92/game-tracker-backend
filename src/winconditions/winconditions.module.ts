@@ -12,5 +12,6 @@ import { WinconditionSchema } from './schemas/wincondition.schema';
   ],
   controllers: [WinconditionsController],
   providers: [WinconditionsService],
+  exports: [WinconditionsService],
 })
 export class WinconditionsModule {}
