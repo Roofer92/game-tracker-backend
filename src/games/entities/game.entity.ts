@@ -1,11 +1,5 @@
-import { Deck } from 'src/decks/schemas/deck.schema';
-import { Player } from 'src/players/schemas/player.schema';
 import { Wincondition } from 'src/winconditions/entities/wincondition.entity';
-
-class Participant {
-  player: Player;
-  deck: Deck;
-}
+import { Participant } from './participant.entity';
 
 export class Game {
   participants: [Participant];
