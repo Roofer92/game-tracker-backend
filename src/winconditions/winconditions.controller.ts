@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { WinconditionsService } from './winconditions.service';
 import { CreateWinconditionDto } from './dto/create-wincondition.dto';
 import { UpdateWinconditionDto } from './dto/update-wincondition.dto';
@@ -19,16 +27,19 @@ export class WinconditionsController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.winconditionsService.findOne(+id);
+    return this.winconditionsService.findOne(id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateWinconditionDto: UpdateWinconditionDto) {
-    return this.winconditionsService.update(+id, updateWinconditionDto);
+  update(
+    @Param('id') id: string,
+    @Body() updateWinconditionDto: UpdateWinconditionDto,
+  ) {
+    return this.winconditionsService.update(id, updateWinconditionDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.winconditionsService.remove(+id);
+    return this.winconditionsService.remove(id);
   }
 }

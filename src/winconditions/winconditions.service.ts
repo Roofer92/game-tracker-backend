@@ -22,20 +22,32 @@ export class WinconditionsService {
     return createdWincondition.save();
   }
 
-  async findAll() {
-    return this.winconditionModel.find().exec();
+  async findAll(): Promise<Wincondition[]> {
+    return this.winconditionModel.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} wincondition`;
+  async findOne(id: string): Promise<Wincondition> {
+    return this.winconditionModel.findOne({ _id: id });
   }
 
-  update(id: number, updateWinconditionDto: UpdateWinconditionDto) {
-    return `This action updates a #${id} wincondition`;
+  async update(
+    id: string,
+    updateWinconditionDto: UpdateWinconditionDto,
+  ): Promise<Wincondition> {
+    return this.winconditionModel.findOneAndUpdate(
+      { _id: id },
+      updateWinconditionDto,
+    );
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} wincondition`;
+  async remove(id: string): Promise<any> {
+    const wincon = await this.winconditionModel.findOne({ _id: id });
+
+    if (wincon.total_wins != 0) {
+      // TODO: return error and dont delete wincon
+    }
+
+    return this.winconditionModel.deleteOne({ _id: id });
   }
 
   async incrementTotalWins(wincondition: Wincondition) {
