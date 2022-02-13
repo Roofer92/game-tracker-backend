@@ -32,9 +32,11 @@ export class DecksService {
     return this.deckModel.findOneAndUpdate({ _id: id }, updateDeckDto);
   }
 
-  async remove(id: number) {
-    // TODO: Remove Deck from player and delete deck
-    return `This action removes a #${id} deck`;
+  async remove(id: string) {
+    const deck = await this.deckModel.findOne({ _id: id });
+
+    await this.playersService.removeDeck(deck);
+    return this.deckModel.deleteOne({ _id: id });
   }
 
   async incrementTotalWins(deck: Deck) {

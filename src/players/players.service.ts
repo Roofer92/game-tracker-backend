@@ -37,6 +37,13 @@ export class PlayersService {
     );
   }
 
+  async removeDeck(deck: Deck) {
+    return await this.playerModel.findOneAndUpdate(
+      { _id: deck.owner },
+      { $pull: { decks: deck } },
+    );
+  }
+
   async incrementTotalWins(player: Player) {
     return await this.playerModel.findOneAndUpdate(
       { player },

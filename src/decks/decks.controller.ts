@@ -37,6 +37,6 @@ export class DecksController {
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.decksService.remove(+id);
+    return this.decksService.remove(id);
   }
 }
