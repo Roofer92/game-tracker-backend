@@ -21,8 +21,8 @@ export class Deck {
   @Prop()
   name: string;
 
-  @Prop({ required: true })
-  commander: Commander;
+  @Prop({ type: [CommanderSchema], required: true })
+  commander: Commander[];
 
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Player' })
   owner: Player;
