@@ -44,4 +44,11 @@ export class WinconditionsService {
       { $inc: { total_wins: 1 } },
     );
   }
+
+  async decrementTotalWins(wincondition: Wincondition) {
+    return await this.winconditionModel.findOneAndUpdate(
+      { wincondition },
+      { $inc: { total_wins: -1 } },
+    );
+  }
 }

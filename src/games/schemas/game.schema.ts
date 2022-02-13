@@ -2,17 +2,14 @@ import * as mongoose from 'mongoose';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Deck } from 'src/decks/schemas/deck.schema';
 import { Player } from 'src/players/schemas/player.schema';
-import {
-  Wincondition,
-  WinconditionSchema,
-} from 'src/winconditions/schemas/wincondition.schema';
+import { Wincondition } from 'src/winconditions/schemas/wincondition.schema';
 
 @Schema()
 export class Participant {
-  @Prop({ required: true })
+  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Player', required: true })
   player: Player;
 
-  @Prop({ required: true })
+  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Deck', required: true })
   deck: Deck;
 }
 

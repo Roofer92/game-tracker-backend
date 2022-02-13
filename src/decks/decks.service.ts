@@ -21,11 +21,11 @@ export class DecksService {
   }
 
   async findAll(): Promise<Deck[]> {
-    return this.deckModel.find().exec();
+    return this.deckModel.find();
   }
 
   async findOne(id: string): Promise<Deck> {
-    return this.deckModel.findOne({ _id: id }).exec();
+    return this.deckModel.findOne({ _id: id });
   }
 
   async update(id: string, updateDeckDto: UpdateDeckDto): Promise<Deck> {
@@ -33,7 +33,7 @@ export class DecksService {
   }
 
   async remove(id: number) {
-    // TODO: Implement remove
+    // TODO: Remove Deck from player and delete deck
     return `This action removes a #${id} deck`;
   }
 
@@ -48,6 +48,20 @@ export class DecksService {
     return await this.deckModel.findOneAndUpdate(
       { deck },
       { $inc: { total_games: 1 } },
+    );
+  }
+
+  async decrementTotalWins(deck: Deck) {
+    return await this.deckModel.findOneAndUpdate(
+      { deck },
+      { $inc: { total_wins: -1 } },
+    );
+  }
+
+  async decrementTotalGames(deck: Deck) {
+    return await this.deckModel.findOneAndUpdate(
+      { deck },
+      { $inc: { total_games: -1 } },
     );
   }
 }

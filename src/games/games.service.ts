@@ -5,7 +5,7 @@ import { DecksService } from 'src/decks/decks.service';
 import { PlayersService } from 'src/players/players.service';
 import { WinconditionsService } from 'src/winconditions/winconditions.service';
 import { CreateGameDto } from './dto/create-game.dto';
-import { UpdateGameDto } from './dto/update-game.dto';
+import { Game } from './entities/game.entity';
 import { GameDocument } from './schemas/game.schema';
 
 @Injectable()
@@ -17,7 +17,7 @@ export class GamesService {
     private winconditionsService: WinconditionsService,
   ) {}
 
-  create(createGameDto: CreateGameDto) {
+  async create(createGameDto: CreateGameDto): Promise<Game> {
     const createdGame = new this.gameModel(createGameDto);
 
     // increment total games
@@ -36,19 +36,29 @@ export class GamesService {
     return createdGame.save();
   }
 
-  findAll() {
-    return `This action returns all games`;
+  async findAll(): Promise<Game[]> {
+    return this.gameModel.find({});
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} game`;
+  async findOne(id: string): Promise<Game> {
+    return this.gameModel.findOne({ _id: id });
   }
 
-  update(id: number, updateGameDto: UpdateGameDto) {
-    return `This action updates a #${id} game`;
-  }
+  async remove(id: string): Promise<any> {
+    const game = await this.gameModel.findOne({ _id: id });
 
-  remove(id: number) {
-    return `This action removes a #${id} game`;
+    // decrement total games
+    game.participants.forEach((p) => {
+      this.playersService.decrementTotalGames(p.player);
+      this.decksService.decrementTotalGames(p.deck);
+    });
+
+    // decrement total wins
+    const winner = game.winner;
+    this.playersService.decrementTotalWins(winner.player);
+    this.decksService.decrementTotalWins(winner.deck);
+    this.winconditionsService.decrementTotalWins(game.wincondition);
+
+    return this.gameModel.deleteOne({ _id: id });
   }
 }
