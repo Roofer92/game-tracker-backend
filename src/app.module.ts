@@ -9,7 +9,7 @@ import { GamesModule } from './games/games.module';
 
 @Module({
   imports: [
-    MongooseModule.forRoot('mongodb://192.168.188.52/game_tracker'),
+    MongooseModule.forRoot('mongodb://192.168.0.234/game_tracker'),
     PlayersModule,
     DecksModule,
     WinconditionsModule,
