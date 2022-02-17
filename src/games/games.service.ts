@@ -25,12 +25,14 @@ export class GamesService {
     participants.forEach((p) => {
       this.playersService.incrementTotalGames(p.player);
       this.decksService.incrementTotalGames(p.deck);
+
+      if (p.isWinner) {
+        this.playersService.incrementTotalWins(p.player);
+        this.decksService.incrementTotalWins(p.deck);
+      }
     });
 
     // increment total wins
-    const winner = createdGame.winner;
-    this.playersService.incrementTotalWins(winner.player);
-    this.decksService.incrementTotalWins(winner.deck);
     this.winconditionsService.incrementTotalWins(createdGame.wincondition);
 
     return createdGame.save();
@@ -51,12 +53,14 @@ export class GamesService {
     game.participants.forEach((p) => {
       this.playersService.decrementTotalGames(p.player);
       this.decksService.decrementTotalGames(p.deck);
+
+      if (p.isWinner) {
+        this.playersService.decrementTotalWins(p.player);
+        this.decksService.decrementTotalWins(p.deck);
+      }
     });
 
     // decrement total wins
-    const winner = game.winner;
-    this.playersService.decrementTotalWins(winner.player);
-    this.decksService.decrementTotalWins(winner.deck);
     this.winconditionsService.decrementTotalWins(game.wincondition);
 
     return this.gameModel.deleteOne({ _id: id });
