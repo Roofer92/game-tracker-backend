@@ -23,7 +23,7 @@ export class PlayersService {
   }
 
   async findOne(id: string): Promise<Player> {
-    return this.playerModel.findOne({ _id: id });
+    return this.playerModel.findOne({ _id: id }).populate('decks');
   }
 
   async update(id: string, updatePlayerDto: UpdatePlayerDto): Promise<Player> {
