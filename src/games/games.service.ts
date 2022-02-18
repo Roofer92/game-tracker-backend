@@ -21,7 +21,7 @@ export class GamesService {
     const createdGame = new this.gameModel(createGameDto);
 
     // increment total games
-    const participants = createdGame.participants;
+    const participants = createGameDto.participants;
     participants.forEach((p) => {
       this.playersService.incrementTotalGames(p.player);
       this.decksService.incrementTotalGames(p.deck);
@@ -49,19 +49,20 @@ export class GamesService {
   async remove(id: string): Promise<any> {
     const game = await this.gameModel.findOne({ _id: id });
 
-    // decrement total games
-    game.participants.forEach((p) => {
-      this.playersService.decrementTotalGames(p.player);
-      this.decksService.decrementTotalGames(p.deck);
+    //TODO: add
+    // // decrement total games
+    // game.participants.forEach((p) => {
+    //   this.playersService.decrementTotalGames(p.player);
+    //   this.decksService.decrementTotalGames(p.deck);
 
-      if (p.isWinner) {
-        this.playersService.decrementTotalWins(p.player);
-        this.decksService.decrementTotalWins(p.deck);
-      }
-    });
+    //   if (p.isWinner) {
+    //     this.playersService.decrementTotalWins(p.player);
+    //     this.decksService.decrementTotalWins(p.deck);
+    //   }
+    // });
 
-    // decrement total wins
-    this.winconditionsService.decrementTotalWins(game.wincondition);
+    // // decrement total wins
+    // this.winconditionsService.decrementTotalWins(game.wincondition);
 
     return this.gameModel.deleteOne({ _id: id });
   }
