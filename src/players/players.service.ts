@@ -19,7 +19,7 @@ export class PlayersService {
   }
 
   async findAll(): Promise<Player[]> {
-    return this.playerModel.find();
+    return this.playerModel.find().populate('decks');
   }
 
   async findOne(id: string): Promise<Player> {
