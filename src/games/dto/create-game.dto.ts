@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 import { Deck } from 'src/decks/entities/deck.entity';
 import { Player } from 'src/players/entities/player.entity';
+import { Wincondition } from 'src/winconditions/entities/wincondition.entity';
 
 export class CreateGameDto {
   participants: {
@@ -8,6 +9,6 @@ export class CreateGameDto {
     deck: { _id: mongoose.Types.ObjectId } & Deck;
     isWinner: boolean;
   }[];
-  wincondition: mongoose.Types.ObjectId;
+  wincondition: { _id: string } & Wincondition;
   playedAt: Date;
 }

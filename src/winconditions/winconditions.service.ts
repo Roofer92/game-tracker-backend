@@ -50,16 +50,16 @@ export class WinconditionsService {
     return this.winconditionModel.deleteOne({ _id: id });
   }
 
-  async incrementTotalWins(wincondition: Wincondition) {
+  async incrementTotalWins(id: string) {
     return await this.winconditionModel.findOneAndUpdate(
-      { wincondition },
+      { _id: id },
       { $inc: { total_wins: 1 } },
     );
   }
 
-  async decrementTotalWins(wincondition: Wincondition) {
+  async decrementTotalWins(id: string) {
     return await this.winconditionModel.findOneAndUpdate(
-      { wincondition },
+      { _id: id },
       { $inc: { total_wins: -1 } },
     );
   }

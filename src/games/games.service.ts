@@ -33,7 +33,9 @@ export class GamesService {
     });
 
     // increment total wins
-    this.winconditionsService.incrementTotalWins(createdGame.wincondition);
+    this.winconditionsService.incrementTotalWins(
+      createGameDto.wincondition._id,
+    );
 
     return createdGame.save();
   }
