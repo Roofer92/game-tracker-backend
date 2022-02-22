@@ -8,10 +8,10 @@ import {
 
 @Schema()
 export class Participant {
-  @Prop({ type: PlayerSchema, ref: 'Player', required: true })
+  @Prop({ type: PlayerSchema, required: true })
   player: Player;
 
-  @Prop({ type: DeckSchema, ref: 'Deck', required: true })
+  @Prop({ type: DeckSchema, required: true })
   deck: Deck;
 
   @Prop({ required: true })

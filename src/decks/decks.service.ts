@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
+import mongoose from 'mongoose';
 import { Model } from 'mongoose';
 import { identity } from 'rxjs';
 import { PlayersService } from 'src/players/players.service';
@@ -40,28 +41,28 @@ export class DecksService {
     return this.deckModel.deleteOne({ _id: id });
   }
 
-  async incrementTotalWins(id: string) {
+  async incrementTotalWins(id: mongoose.Types.ObjectId) {
     return await this.deckModel.findOneAndUpdate(
       { _id: id },
       { $inc: { total_wins: 1 } },
     );
   }
 
-  async incrementTotalGames(id: string) {
+  async incrementTotalGames(id: mongoose.Types.ObjectId) {
     return await this.deckModel.findOneAndUpdate(
       { _id: id },
       { $inc: { total_games: 1 } },
     );
   }
 
-  async decrementTotalWins(id: string) {
+  async decrementTotalWins(id: mongoose.Types.ObjectId) {
     return await this.deckModel.findOneAndUpdate(
       { _id: id },
       { $inc: { total_wins: -1 } },
     );
   }
 
-  async decrementTotalGames(id: string) {
+  async decrementTotalGames(id: mongoose.Types.ObjectId) {
     return await this.deckModel.findOneAndUpdate(
       { _id: id },
       { $inc: { total_games: -1 } },

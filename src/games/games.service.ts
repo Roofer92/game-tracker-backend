@@ -23,12 +23,12 @@ export class GamesService {
     // increment total games
     const participants = createGameDto.participants;
     participants.forEach((p) => {
-      this.playersService.incrementTotalGames(p.player);
-      this.decksService.incrementTotalGames(p.deck);
+      this.playersService.incrementTotalGames(p.player._id);
+      this.decksService.incrementTotalGames(p.deck._id);
 
       if (p.isWinner) {
-        this.playersService.incrementTotalWins(p.player);
-        this.decksService.incrementTotalWins(p.deck);
+        this.playersService.incrementTotalWins(p.player._id);
+        this.decksService.incrementTotalWins(p.deck._id);
       }
     });
 
