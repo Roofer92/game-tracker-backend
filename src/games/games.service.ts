@@ -39,7 +39,7 @@ export class GamesService {
   }
 
   async findAll(): Promise<Game[]> {
-    return this.gameModel.find({});
+    return this.gameModel.find({}).sort({ playedAt: 'desc' });
   }
 
   async findOne(id: string): Promise<Game> {
