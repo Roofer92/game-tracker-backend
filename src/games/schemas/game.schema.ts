@@ -1,4 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import mongoose from 'mongoose';
 import { Deck, DeckSchema } from 'src/decks/schemas/deck.schema';
 import { Player, PlayerSchema } from 'src/players/schemas/player.schema';
 import {
@@ -29,6 +30,9 @@ export class Game {
 
   @Prop({ type: WinconditionSchema, ref: 'Wincondition' })
   wincondition: Wincondition;
+
+  @Prop({ type: Date, required: true })
+  playedAt: Date;
 }
 
 export const GameSchema = SchemaFactory.createForClass(Game);

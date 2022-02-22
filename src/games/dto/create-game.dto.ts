@@ -9,4 +9,5 @@ export class CreateGameDto {
     isWinner: boolean;
   }[];
   wincondition: mongoose.Types.ObjectId;
+  playedAt: Date;
 }
