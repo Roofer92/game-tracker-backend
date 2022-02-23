@@ -11,7 +11,7 @@ export class Commander {
   name: string;
 
   @Prop()
-  scryfall_url: string;
+  scryfall_id: string;
 }
 
 export const CommanderSchema = SchemaFactory.createForClass(Commander);

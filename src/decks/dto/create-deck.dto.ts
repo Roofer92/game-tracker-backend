@@ -3,7 +3,7 @@ export class CreateDeckDto {
   commander: [
     {
       name: string;
-      scryfall_url: string;
+      scryfall_id: string;
     },
   ];
   owner: string;
